@@ -1,24 +1,18 @@
 // const boom = require('@hapi/boom');
+// const pool = require('../lib/postgres.pool');
 
-const pool = require('../lib/postgres.pool');
+const { models } = require('./../lib/sequelize');
 
 class UserService {
-  constructor() {
-    this.pool = pool;
-    this.pool.on('error', (err) => {
-      console.error('Unexpected error on idle client', err);
-      process.exit(-1);
-    });
-  }
+  constructor() {}
 
   async create(data) {
     return data;
   }
 
   async find() {
-    const query = 'SELECT * FROM tasks';
-    const res = await this.pool.query(query);
-    return res.rows;
+    const res = await models.User.findAll();
+    return res;
   }
 
   async findOne(id) {
