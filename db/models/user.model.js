@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 const USER_TABLE = 'users';
 
@@ -18,12 +18,6 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    field: 'created_at',
-    defaltValue: Sequelize.fn('NOW'),
-  },
 };
 
 class User extends Model {
@@ -34,7 +28,7 @@ class User extends Model {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false,
+      timestamps: true,
     };
   }
 }
