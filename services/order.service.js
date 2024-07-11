@@ -13,6 +13,11 @@ class OrderService {
     return orders;
   }
 
+  async addItem(data) {
+    const newItem = await models.OrderProduct.create(data);
+    return newItem;
+  }
+
   async findOne(id) {
     const order = await models.Order.findByPk(id, {
       include: [
@@ -20,6 +25,7 @@ class OrderService {
           association: 'customer',
           include: ['user'],
         },
+        'items',
       ],
     });
     if (!order) {
