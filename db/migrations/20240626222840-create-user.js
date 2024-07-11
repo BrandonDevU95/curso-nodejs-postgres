@@ -8,12 +8,7 @@ module.exports = {
     await queryInterface.createTable(USER_TABLE, UserSchema); // Este método crea la tabla en la base de datos con el nombre y el esquema que le pasamos
   },
 
-  async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  async down(queryInterface) {
+    await queryInterface.dropTable(USER_TABLE); // Este método elimina la tabla de la base de datos
   },
 };
