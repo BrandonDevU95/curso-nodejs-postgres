@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 const { USER_TABLE } = require('./user.model');
 
@@ -14,12 +14,6 @@ const CustomerSchema = {
   name: { allowNull: false, type: DataTypes.STRING },
   lastName: { allowNull: false, type: DataTypes.STRING, field: 'last_name' },
   phone: { allowNull: true, type: DataTypes.STRING },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: Sequelize.NOW,
-  },
   userId: {
     field: 'user_id',
     allowNull: false,
