@@ -26,14 +26,16 @@ const UserSchema = {
 };
 
 class User extends Model {
-  static associate() {}
+  static associate(model) {
+    this.hasOne(model.Customer, { as: 'customer', foreignKey: 'userId' });
+  }
 
   static config(sequelize) {
     return {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false,
+      timestamps: true,
     };
   }
 }
