@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const { CUSTOMER_TABLE } = require('./customer.model');
 
-const ORDERS_TABLE = 'orders';
+const ORDER_TABLE = 'orders';
 
 const OrderSchema = {
   id: {
@@ -24,16 +24,22 @@ const OrderSchema = {
 class Order extends Model {
   static associate(models) {
     this.belongsTo(models.Customer, { as: 'customer' });
+    this.belongsToMany(models.Product, {
+      as: 'items',
+      through: models.OrderProduct,
+      foreignKey: 'orderId',
+      otherKey: 'productId',
+    });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ORDERS_TABLE,
+      tableName: ORDER_TABLE,
       modelName: 'Order',
       timestamps: true,
     };
   }
 }
 
-module.exports = { Order, OrderSchema, ORDERS_TABLE };
+module.exports = { Order, OrderSchema, ORDER_TABLE };
