@@ -30,10 +30,25 @@ class ProductsService {
     return newProduct;
   }
 
-  async find() {
-    const products = await models.Product.findAll({
+  async find(query) {
+    const { limit, offset } = query;
+    const options = {
       include: ['category'],
-    });
+    };
+
+    if (limit > 100) {
+      throw boom.badRequest('limit should be less than 100');
+    }
+    if (offset < 0) {
+      throw boom.badRequest('offset should be greater than 0');
+    }
+
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const products = await models.Product.findAll(options);
     return products;
   }
 
