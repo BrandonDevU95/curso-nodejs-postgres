@@ -44,7 +44,9 @@ class OrderService {
   }
 
   async delete(id) {
-    return { id };
+    const order = await this.findOne(id);
+    await order.destroy();
+    return { rta: true };
   }
 }
 
